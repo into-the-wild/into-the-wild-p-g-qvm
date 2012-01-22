@@ -1,0 +1,65 @@
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/svn/!svn/ver/49/trunk/src/tools/lcc/build-mingw32-x86/cpp
+END
+macro.d
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn/!svn/ver/49/trunk/src/tools/lcc/build-mingw32-x86/cpp/macro.d
+END
+cpp.d
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svn/!svn/ver/49/trunk/src/tools/lcc/build-mingw32-x86/cpp/cpp.d
+END
+getopt.d
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/!svn/ver/49/trunk/src/tools/lcc/build-mingw32-x86/cpp/getopt.d
+END
+tokens.d
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/!svn/ver/49/trunk/src/tools/lcc/build-mingw32-x86/cpp/tokens.d
+END
+include.d
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/!svn/ver/49/trunk/src/tools/lcc/build-mingw32-x86/cpp/include.d
+END
+unix.d
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svn/!svn/ver/49/trunk/src/tools/lcc/build-mingw32-x86/cpp/unix.d
+END
+hideset.d
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/!svn/ver/49/trunk/src/tools/lcc/build-mingw32-x86/cpp/hideset.d
+END
+eval.d
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svn/!svn/ver/49/trunk/src/tools/lcc/build-mingw32-x86/cpp/eval.d
+END
+lex.d
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svn/!svn/ver/49/trunk/src/tools/lcc/build-mingw32-x86/cpp/lex.d
+END
+nlist.d
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn/!svn/ver/49/trunk/src/tools/lcc/build-mingw32-x86/cpp/nlist.d
+END

@@ -1,0 +1,185 @@
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/svn/!svn/ver/50/trunk/src/tools/lcc/build-mingw32-x86/rcc
+END
+bytecode.d
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/!svn/ver/49/trunk/src/tools/lcc/build-mingw32-x86/rcc/bytecode.d
+END
+profio.d
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/!svn/ver/49/trunk/src/tools/lcc/build-mingw32-x86/rcc/profio.d
+END
+trace.d
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn/!svn/ver/49/trunk/src/tools/lcc/build-mingw32-x86/rcc/trace.d
+END
+input.d
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn/!svn/ver/49/trunk/src/tools/lcc/build-mingw32-x86/rcc/input.d
+END
+tree.d
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svn/!svn/ver/49/trunk/src/tools/lcc/build-mingw32-x86/rcc/tree.d
+END
+output.d
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/!svn/ver/49/trunk/src/tools/lcc/build-mingw32-x86/rcc/output.d
+END
+init.d
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svn/!svn/ver/49/trunk/src/tools/lcc/build-mingw32-x86/rcc/init.d
+END
+types.d
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn/!svn/ver/49/trunk/src/tools/lcc/build-mingw32-x86/rcc/types.d
+END
+prof.d
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svn/!svn/ver/49/trunk/src/tools/lcc/build-mingw32-x86/rcc/prof.d
+END
+string.d
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/!svn/ver/49/trunk/src/tools/lcc/build-mingw32-x86/rcc/string.d
+END
+decl.d
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svn/!svn/ver/49/trunk/src/tools/lcc/build-mingw32-x86/rcc/decl.d
+END
+simp.d
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svn/!svn/ver/49/trunk/src/tools/lcc/build-mingw32-x86/rcc/simp.d
+END
+sym.d
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svn/!svn/ver/49/trunk/src/tools/lcc/build-mingw32-x86/rcc/sym.d
+END
+gen.d
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svn/!svn/ver/49/trunk/src/tools/lcc/build-mingw32-x86/rcc/gen.d
+END
+null.d
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svn/!svn/ver/49/trunk/src/tools/lcc/build-mingw32-x86/rcc/null.d
+END
+list.d
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svn/!svn/ver/49/trunk/src/tools/lcc/build-mingw32-x86/rcc/list.d
+END
+bind.d
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svn/!svn/ver/49/trunk/src/tools/lcc/build-mingw32-x86/rcc/bind.d
+END
+expr.d
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svn/!svn/ver/49/trunk/src/tools/lcc/build-mingw32-x86/rcc/expr.d
+END
+event.d
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn/!svn/ver/49/trunk/src/tools/lcc/build-mingw32-x86/rcc/event.d
+END
+symbolic.d
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/!svn/ver/49/trunk/src/tools/lcc/build-mingw32-x86/rcc/symbolic.d
+END
+main.d
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svn/!svn/ver/49/trunk/src/tools/lcc/build-mingw32-x86/rcc/main.d
+END
+inits.d
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn/!svn/ver/49/trunk/src/tools/lcc/build-mingw32-x86/rcc/inits.d
+END
+stmt.d
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svn/!svn/ver/49/trunk/src/tools/lcc/build-mingw32-x86/rcc/stmt.d
+END
+lex.d
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svn/!svn/ver/49/trunk/src/tools/lcc/build-mingw32-x86/rcc/lex.d
+END
+dagcheck.c
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/!svn/ver/50/trunk/src/tools/lcc/build-mingw32-x86/rcc/dagcheck.c
+END
+error.d
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn/!svn/ver/49/trunk/src/tools/lcc/build-mingw32-x86/rcc/error.d
+END
+dagcheck.d
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/!svn/ver/49/trunk/src/tools/lcc/build-mingw32-x86/rcc/dagcheck.d
+END
+enode.d
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn/!svn/ver/49/trunk/src/tools/lcc/build-mingw32-x86/rcc/enode.d
+END
+alloc.d
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn/!svn/ver/49/trunk/src/tools/lcc/build-mingw32-x86/rcc/alloc.d
+END
+dag.d
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svn/!svn/ver/49/trunk/src/tools/lcc/build-mingw32-x86/rcc/dag.d
+END

@@ -1,0 +1,23 @@
+K 25
+svn:wc:ra_dav:version-url
+V 54
+/svn/!svn/ver/50/trunk/src/tools/lcc/build-mingw32-x86
+END
+q3lcc.exe
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svn/!svn/ver/50/trunk/src/tools/lcc/build-mingw32-x86/q3lcc.exe
+END
+q3cpp.exe
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svn/!svn/ver/50/trunk/src/tools/lcc/build-mingw32-x86/q3cpp.exe
+END
+q3rcc.exe
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svn/!svn/ver/50/trunk/src/tools/lcc/build-mingw32-x86/q3rcc.exe
+END
