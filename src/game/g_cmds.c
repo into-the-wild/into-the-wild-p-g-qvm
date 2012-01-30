@@ -4591,9 +4591,19 @@ qboolean G_FollowNewClient( gentity_t *ent, int dir )
       continue;
 
     // can't follow another spectator
-    if( level.clients[ clientnum ].pers.teamSelection == PTE_NONE && !g_specAspec.integer )
+    if( level.clients[ clientnum ].pers.teamSelection == PTE_NONE )
       continue;
-
+      // can only follow teammates when dead and on a team
+     if( ent->client->pers.teamSelection != PTE_NONE && 
+         ( level.clients[ clientnum ].pers.teamSelection != 
+           ent->client->pers.teamSelection ) )
+       continue;
+     
+     // cannot follow a teammate who is following you
+     if( level.clients[ clientnum ].sess.spectatorState == SPECTATOR_FOLLOW && 
+         ( level.clients[ clientnum ].sess.spectatorClient == ent->s.number ) )
+       continue;
+     
     // this is good, we can use it
     ent->client->sess.spectatorClient = clientnum;
     ent->client->sess.spectatorState = SPECTATOR_FOLLOW;
@@ -4663,7 +4673,10 @@ void Cmd_Follow_f( gentity_t *ent )
       return;
 
     // can't follow another spectator
-    if( level.clients[ i ].pers.teamSelection == PTE_NONE && !g_specAspec.integer  )
+    if( level.clients[ i ].pers.teamSelection == PTE_NONE )
+      return;
+        // can only follow teammates when dead and on a team
+    if( ent->client->pers.teamSelection != PTE_NONE && ( level.clients[ i ].pers.teamSelection != ent->client->pers.teamSelection ) )
       return;
 
     ent->client->sess.spectatorState = SPECTATOR_FOLLOW;
