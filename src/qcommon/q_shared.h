@@ -26,7 +26,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 // q_shared.h -- included first by ALL program modules.
 // A user mod should never modify this file
-#define PRODUCT_NAME          "p-g-qvm"
+#define PRODUCT_NAME          "itw-qvm/p-g-qvm"
 #define PRODUCT_VERSION       "1.6.5"
 
 #ifdef SVN_VERSION
