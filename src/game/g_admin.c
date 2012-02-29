@@ -3530,6 +3530,11 @@ qboolean G_admin_listrotation( gentity_t *ent, int skiparg )
           statusColor = 3;
           status = "current slot";
         }
+        else if (mapRotations.rotations[i].maps[j].name[0] == '#')
+        {
+          statusColor = 5;
+          status = "(label)";
+        }
         else if (!G_MapExists( mapRotations.rotations[ i ].maps[ j ].name ))
         {
           statusColor = 1;
