@@ -3505,6 +3505,7 @@ qboolean G_admin_listrotation( gentity_t *ent, int skiparg )
 {
   int i, j, statusColor;
   char *status = '\0';
+  int ignoreEntry;
 
   extern mapRotations_t mapRotations;
 
@@ -3525,15 +3526,15 @@ qboolean G_admin_listrotation( gentity_t *ent, int skiparg )
       ADMBP( va( "^3!rotation: ^7%s\n", mapRotations.rotations[ i ].name ) );
       for( j = 0; j < mapRotations.rotations[ i ].numMaps; j++ )
       {
-        if ( G_GetCurrentMap( i ) == j )
+        ignoreEntry = 0; // By default all entries are printed
+        if (mapRotations.rotations[i].maps[j].name[0] == '#')
+        {
+          ignoreEntry = !0;
+        }
+        else if ( G_GetCurrentMap( i ) == j )
         {
           statusColor = 3;
           status = "current slot";
-        }
-        else if (mapRotations.rotations[i].maps[j].name[0] == '#')
-        {
-          statusColor = 5;
-          status = "(label)";
         }
         else if (!G_MapExists( mapRotations.rotations[ i ].maps[ j ].name ))
         {
@@ -3545,7 +3546,10 @@ qboolean G_admin_listrotation( gentity_t *ent, int skiparg )
           statusColor = 7;
           status = "";
         }
-        ADMBP( va( "^%i%3i %-20s ^%i%s\n", statusColor, j + 1, mapRotations.rotations[ i ].maps[ j ].name, statusColor, status ) );
+        
+        if (!ignoreEntry) {
+            ADMBP( va( "^%i%3i %-20s ^%i%s\n", statusColor, j + 1, mapRotations.rotations[ i ].maps[ j ].name, statusColor, status ) );
+        }
       }
 
       ADMBP_end();
