@@ -3506,6 +3506,7 @@ qboolean G_admin_listrotation( gentity_t *ent, int skiparg )
   int i, j, statusColor;
   char *status = '\0';
   int ignoreEntry;
+  int mappedEntryIdx = 1;
 
   extern mapRotations_t mapRotations;
 
@@ -3548,7 +3549,8 @@ qboolean G_admin_listrotation( gentity_t *ent, int skiparg )
         }
         
         if (!ignoreEntry) {
-            ADMBP( va( "^%i%3i %-20s ^%i%s\n", statusColor, j + 1, mapRotations.rotations[ i ].maps[ j ].name, statusColor, status ) );
+            ADMBP( va( "^%i%3i %-20s ^%i%s\n", statusColor, mappedEntryIdx, mapRotations.rotations[ i ].maps[ j ].name, statusColor, status ) );
+            ++mappedEntryIdx;
         }
       }
 
