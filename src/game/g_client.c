@@ -1405,7 +1405,7 @@ char *ClientConnect( int clientNum, qboolean firstTime )
     value++;
   }
   ip[ i ] = '\0';
-  if( G_FilterPacket( value ) )
+  if( G_FilterPacket( ip ) )
     return "You are banned from this server.";
 
   // check for a password
