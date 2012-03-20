@@ -1218,8 +1218,17 @@ qboolean AHovel_Blocked( gentity_t *hovel, gentity_t *player, qboolean provideEx
 
   displacement = VectorMaxComponent( maxs ) * M_ROOT3 +
                  VectorMaxComponent( hovelMaxs ) * M_ROOT3 + 1.0f;
-
   VectorMA( hovel->s.origin, displacement, forward, origin );
+
+  VectorCopy( hovel->s.origin, start );
+  VectorCopy( origin, end );
+
+  // see if there's something between the hovel and its exit 
+  // (eg built right up against a wall)
+  trap_Trace( &tr, start, NULL, NULL, end, player->s.number, MASK_PLAYERSOLID );
+  if( tr.fraction < 1.0f )
+    return qtrue;
+
   vectoangles( forward, angles );
 
   VectorMA( origin, HOVEL_TRACE_DEPTH, normal, start );
