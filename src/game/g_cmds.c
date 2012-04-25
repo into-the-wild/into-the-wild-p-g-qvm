@@ -2474,39 +2474,18 @@ void Cmd_CallTeamVote_f( gentity_t *ent )
             "called a team vote: %s \n\"", ent->client->pers.netname, level.teamVoteDisplayString[ cs_offset ] ) );
 	  trap_SendServerCommand( i, "cp \"A teamvote has been called\n^2F1: Yes^7, ^1F2: No^7\"" );
     }
-    //If is a poll and admin is in the spectator team
+    
     if(IsPoll&&g_entities[i].client->pers.teamSelection == PTE_NONE && G_admin_permission(g_entities + i, ADMF_SPEC_ALLCHAT))
     {
       
-    //Show the vote
+    //IsSpect=qtrue;
     G_AdminPrintf(i,"Team [%s] Teamvote poll called by %s (Vote:%s)",(ent->client->pers.teamSelection == PTE_ALIENS)? "^aAliens" : "^dHumans",ent->client->pers.netname,level.teamVoteDisplayString[ cs_offset ]);
-    //Skip to the next client
-    i++;
     }
-    //If it isn't a poll and admin is a spectator
-    else if( !IsPoll && g_entities[i].client->pers.teamSelection == PTE_NONE && G_admin_permission(g_entities + i, ADMF_SPEC_ALLCHAT))
+    else
     {
-           G_AdminPrintf("Team [%s] Teamvote called by %s (Vote:%s)",(ent->client->pers.teamSelection == PTE_ALIENS)? "^aAliens" : "^dHumans",ent->client->pers.netname,level.teamVoteDisplayString[ cs_offset ]);
-	  //Skip
-	   i++;
+      G_AdminsPrintf("Team [%s] Teamvote called by %s (Vote:%s)",(ent->client->pers.teamSelection == PTE_ALIENS)? "^aAliens" : "^dHumans",ent->client->pers.netname,level.teamVoteDisplayString[ cs_offset ]);
+    }
       
-    }
-    //If it isn't a poll and admin is not a spectator
-    else if( !IsPoll && g_entities[i].client->pers.teamSelection != PTE_NONE && G_admin_permission(g_entities + i, ADMF_SPEC_ALLCHAT) )
-    {
-      G_AdminPrintf("Team [%s] Teamvote called by %s (Vote:%s)",(ent->client->pers.teamSelection == PTE_ALIENS)? "^aAliens" : "^dHumans",ent->client->pers.netname,level.teamVoteDisplayString[ cs_offset ]);
-      //Skip to the next client
-      i++;
-    }
-
-    //If is a poll and admin is in a team let the teamvote code do the job.
-    else if( IsPoll && g_entities[i].client->pers.teamSelection != PTE_NONE && G_admin_permission(g_entities + i, ADMF_SPEC_ALLCHAT))
-    {
-	   G_AdminPrintf("Team [%s] Teamvote called by %s",(ent->client->pers.teamSelection == PTE_ALIENS) ? "^aAliens" : "^dHumans",ent->client->pers.netname);
-	   //Skip
-	   i++;
-    }
-    
 
   }
 
