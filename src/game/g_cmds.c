@@ -2203,7 +2203,7 @@ static void teamvoteNotify(
     gentity_t* playerEnt;
     
     // Build notification message
-    Com_sprintf(message, 1024, "^g[%s^g] Teamvote called by %s^g: %s",
+    Com_sprintf(message, 1024, "^g[%s^g] Teamvote called by %s^g: %s\n",
           teamId2Name(caller->client->pers.teamSelection, qtrue),
           caller->client->pers.netname, voteString);
     
