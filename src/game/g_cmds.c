@@ -2195,20 +2195,16 @@ static char const* teamId2Name(int team, qboolean color) {
  *      A pointer to the entity that called the vote.
  * @param [in] voteString
  *      The vote string.
- * @param [in] isPoll
- *      @a qtrue The vote is a poll.
- *      @a qfalse The vote is not a poll.
  */
 static void teamvoteNotify(
-      gentity_t* caller, char const* voteString, qboolean isPoll) {
+      gentity_t* caller, char const* voteString) {
     char message[1024];
     int i;
     gentity_t* playerEnt;
     
     // Build notification message
-    Com_sprintf(message, 1024, "^g[%s^g] %s called by %s^g: %s",
+    Com_sprintf(message, 1024, "^g[%s^g] Teamvote called by %s^g: %s",
           teamId2Name(caller->client->pers.teamSelection, qtrue),
-          isPoll? "Teamvote poll" : "Teamvote",
           caller->client->pers.netname, voteString);
     
     // Send notification to admins
@@ -2540,7 +2536,7 @@ void Cmd_CallTeamVote_f( gentity_t *ent )
   }
   
     // Notify admins about the teamvote
-	teamvoteNotify(ent, level.teamVoteDisplayString[cs_offset], IsPoll);
+	teamvoteNotify(ent, level.teamVoteDisplayString[cs_offset]);
 
 
   // start the voting
