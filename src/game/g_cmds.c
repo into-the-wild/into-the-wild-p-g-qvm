@@ -2195,9 +2195,12 @@ static char const* teamId2Name(int team, qboolean color) {
  *      A pointer to the entity that called the vote.
  * @param [in] voteString
  *      The vote string.
+ * @param [in] isPoll
+ *      - @c true if the teamvote is a poll.
+ *      - @c false if the teamvote is not a poll.
  */
 static void teamvoteNotify(
-      gentity_t* caller, char const* voteString) {
+      gentity_t* caller, char const* voteString, qboolean isPoll) {
     char message[1024];
     int i;
     gentity_t* playerEnt;
@@ -2210,11 +2213,14 @@ static void teamvoteNotify(
     // Send notification to admins
     for (i = 0; i < level.maxclients; ++i) {
         playerEnt = g_entities + i;
-        if (playerEnt->client->pers.teamSelection == PTE_NONE
-              && G_admin_permission(playerEnt, ADMF_ADMINCHAT)
+        if (G_admin_permission(playerEnt, ADMF_ADMINCHAT)
               && G_admin_permission(playerEnt, ADMF_SPEC_ALLCHAT)
               && !playerEnt->client->pers.ignoreAdminWarnings) {
-            trap_SendServerCommand(i, va("print \"%s\"", message));
+            // Let admins see non-poll teamvotes
+            if (isPoll && playerEnt->client->pers.teamSelection == PTE_NONE
+                  || !isPoll) {
+                trap_SendServerCommand(i, va("print \"%s\"", message));
+            }
         }
     }
     
@@ -2536,7 +2542,7 @@ void Cmd_CallTeamVote_f( gentity_t *ent )
   }
   
     // Notify admins about the teamvote
-	teamvoteNotify(ent, level.teamVoteDisplayString[cs_offset]);
+	teamvoteNotify(ent, level.teamVoteDisplayString[cs_offset], IsPoll);
 
 
   // start the voting
