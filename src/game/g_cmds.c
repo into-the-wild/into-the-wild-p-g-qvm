@@ -2218,7 +2218,8 @@ static void teamvoteNotify(
               && !playerEnt->client->pers.ignoreAdminWarnings) {
             // Let admins see non-poll teamvotes
             if (isPoll && playerEnt->client->pers.teamSelection == PTE_NONE
-                  || !isPoll) {
+                  || !isPoll && playerEnt->client->pers.teamSelection
+                  != caller->client->pers.teamSelection) {
                 trap_SendServerCommand(i, va("print \"%s\"", message));
             }
         }
