@@ -2188,7 +2188,7 @@ static char const* teamId2Name(int team, qboolean color) {
 
 /**
  * Notify admins about a teamvote. Only spectating admins that can
- * see admin chat and teamchat are notified. Notification is save
+ * see admin chat and teamchat are notified. Notification is saved
  * in the server log too.
  * 
  * @param [in] caller
