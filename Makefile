@@ -150,6 +150,20 @@ ifneq ($(USE_SVN),1)
     SVN_VERSION=$(VERSION)
 endif
 
+USE_GIT=
+ifeq ($(wildcard .git),.git)
+  GIT_COMMIT_ID_=$(shell LANG=C git log -1 --pretty=format:'%h')
+  ifneq ($(GIT_COMMIT_ID_),)
+    GIT_COMMIT_ID=$(GIT_COMMIT_ID_)
+    USE_GIT=1
+  endif
+endif
+ifneq ($(USE_GIT),1)
+    GIT_COMMIT_ID=
+endif
+
+
+
 
 #############################################################################
 # SETUP AND BUILD -- LINUX
@@ -739,6 +753,15 @@ ifeq ($(USE_SVN),1)
     Q3CFLAGS += -DSVN_VERSION=\\\"$(SVN_VERSION)\\\"
   else
     Q3CFLAGS += -DSVN_VERSION=\"$(SVN_VERSION)\"
+  endif
+endif
+
+ifeq ($(USE_GIT),1)
+  BASE_CFLAGS += -DGIT_COMMIT_ID=\\\"$(GIT_COMMIT_ID)\\\"
+  ifeq ($(PLATFORM),mingw32)
+    Q3CFLAGS += -DGIT_COMMIT_ID=\\\"$(GIT_COMMIT_ID)\\\"
+  else
+    Q3CFLAGS += -DGIT_COMMIT_ID=\"$(GIT_COMMIT_ID)\"
   endif
 endif
 

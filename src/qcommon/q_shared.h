@@ -29,8 +29,10 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #define PRODUCT_NAME          "itw-qvm/p-g-qvm"
 #define PRODUCT_VERSION       "1.6.5"
 
-#ifdef SVN_VERSION
+#if defined(SVN_VERSION)
 # define Q3_VERSION PRODUCT_NAME " v" PRODUCT_VERSION " SVN r" SVN_VERSION
+#elif defined(GIT_COMMIT_ID)
+# define Q3_VERSION PRODUCT_NAME " (" GIT_COMMIT_ID ")"
 #else
 # define Q3_VERSION PRODUCT_NAME " v" PRODUCT_VERSION
 #endif
