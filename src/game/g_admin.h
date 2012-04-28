@@ -152,6 +152,25 @@ typedef struct g_admin_namelog
   char      guid[ 33 ];
   int       slot;
   qboolean  banned;
+  
+  /**
+   * Determines if building was denied for the player identified
+   * by this namelog entry.
+   *  - @c qtrue - The player was denied from building.
+   *  - @c qfalse - The player was not denied from building.
+   * 
+   * @see G_admin_namelog_update
+   */
+  qboolean  denyBuild;
+  
+  /**
+   * Determines if the player identified by this namelog entry was muted.
+   *  - @c qtrue - The player was muted.
+   *  - @c qfalse - The player was not muted.
+   * 
+   * @see G_admin_namelog_update
+   */
+  qboolean  muted;
 }
 g_admin_namelog_t;
 
