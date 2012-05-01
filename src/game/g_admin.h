@@ -171,6 +171,16 @@ typedef struct g_admin_namelog
    * @see G_admin_namelog_update
    */
   qboolean  muted;
+  
+  /**
+   * Determines if the player identified by this namelog entry was bound
+   * to the spectators team (for example using @c !forcespec).
+   *  - @c qtrue - The player is bound to the spectators team.
+   *  - @c qfalse - The player is free to choose teams.
+   * 
+   * @see G_admin_namelog_update
+   */
+  qboolean boundToSpec;
 }
 g_admin_namelog_t;
 

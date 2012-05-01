@@ -1674,6 +1674,11 @@ void G_admin_namelog_update( gclient_t *client, qboolean disconnect )
           G_AdminsPrintf( "^7%s^7's denybuild has been restored.\n", client->pers.netname );
           g_admin_namelog[ i ]->denyBuild = qfalse;
         }
+        if (g_admin_namelog[i]->boundToSpec) {
+            client->pers.specd = qtrue;
+            G_AdminsPrintf("^g%s^g's forcespec has been restored.\n", client->pers.netname);
+            g_admin_namelog[i]->boundToSpec = qfalse;
+        }
       }
       else
       {
@@ -1686,6 +1691,9 @@ void G_admin_namelog_update( gclient_t *client, qboolean disconnect )
         if( client->pers.denyBuild )
         {
           g_admin_namelog[ i ]->denyBuild = qtrue;
+        }
+        if (client->pers.specd) {
+            g_admin_namelog[i]->boundToSpec = qtrue;
         }
       }
       
