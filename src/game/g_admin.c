@@ -4641,9 +4641,11 @@ qboolean G_admin_designate( gentity_t *ent, int skiparg )
    vic = &g_entities[ pids[ 0 ] ];
    //next line is the onscreen warning
    CPx( pids[ 0 ],va("cp \"^1You have been warned by an administrator.\n ^3Cease imeediately or face admin action!\n^1 %s%s\"",(*reason)? "REASON: " : "" ,(*reason)? reason : "") );
-   AP( va( "print \"^3!warn: ^7%s^7 has been warned to cease and desist %s by %s \n\"",
-             vic->client->pers.netname, (*reason) ? reason : "his current activity",
-             ( ent ) ? ent->client->pers.netname : "console" ) );//console announcement
+   AP( va( "print \"^3!warn: ^7%s^7 has been warned by ^g%s^g.%s%s\n\"",
+          vic->client->pers.netname,
+          ent ? ent->client->pers.netname : "^fconsole",
+          (*reason)? " ^cREASON: " : "",
+          (*reason)? reason : "") );//console announcement
    ClientUserinfoChanged( pids[ 0 ] );
    return qtrue;
  }
