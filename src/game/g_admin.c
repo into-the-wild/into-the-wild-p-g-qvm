@@ -5751,7 +5751,8 @@ qboolean G_admin_cp( gentity_t *ent, int skiparg )
   Q_strncpyz( msg, s, sizeof( msg ) );
   G_ParseEscapedString( msg );
   trap_SendServerCommand( -1, va( "cp \"%s\"", msg ) );
-  trap_SendServerCommand( -1, va( "print \"CP: %s\n\"", msg ) );
+  G_AdminsPrintf("^g%s^g used ^c!cp^g: ^g%s\n",
+    ent->client->pers.netname, msg);
 
   return qtrue;
 }
