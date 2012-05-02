@@ -5752,7 +5752,7 @@ qboolean G_admin_cp( gentity_t *ent, int skiparg )
   G_ParseEscapedString( msg );
   trap_SendServerCommand( -1, va( "cp \"%s\"", msg ) );
   G_AdminsPrintf("^g%s^g used ^c!cp^g: ^g%s\n",
-    ent->client->pers.netname, msg);
+    (ent? ent->client->pers.netname : "^fconsole"), msg);
 
   return qtrue;
 }
