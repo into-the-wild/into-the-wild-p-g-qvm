@@ -153,8 +153,16 @@ endif
 USE_GIT=
 ifeq ($(wildcard .git),.git)
   GIT_COMMIT_ID_=$(shell LANG=C git log -1 --pretty=format:'%h')
+  GIT_BRANCH_=$(shell LANG=C git symbolic-ref --short HEAD)
+  ifeq ($(GIT_BRANCH_),master)
+    GIT_BRANCH_=
+  endif
   ifneq ($(GIT_COMMIT_ID_),)
-    GIT_COMMIT_ID=$(GIT_COMMIT_ID_)
+    ifneq ($(GIT_BRANCH_),)
+      GIT_COMMIT_ID=$(GIT_BRANCH_)/$(GIT_COMMIT_ID_)
+    else
+      GIT_COMMIT_ID=$(GIT_COMMIT_ID_)
+    endif
     USE_GIT=1
   endif
 endif
