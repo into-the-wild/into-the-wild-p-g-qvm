@@ -1994,7 +1994,7 @@ void Cmd_CallVote_f( gentity_t *ent )
      }
     Com_sprintf( level.voteString, sizeof( level.voteString ), nullstring);
     Com_sprintf( level.voteDisplayString,
-        sizeof( level.voteDisplayString ), "[Poll] \'%s\'", arg2plus );
+        sizeof( level.voteDisplayString ), "[Poll] \'%s\'^g", arg2plus );
    }
    else if( !Q_stricmp( arg1, "sudden_death" ) ||
      !Q_stricmp( arg1, "suddendeath" ) )
