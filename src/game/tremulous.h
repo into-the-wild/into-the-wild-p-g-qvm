@@ -21,6 +21,9 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 ===========================================================================
 */
 
+#ifndef TREMULOUS_INCLUDED_
+#define TREMULOUS_INCLUDED_
+
 
 /*
  * ALIEN weapons
@@ -631,3 +634,6 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #define SDMODE_BP                   0 
 #define SDMODE_NO_BUILD             1
 #define SDMODE_SELECTIVE            2
+
+#endif
+

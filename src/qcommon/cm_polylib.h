@@ -21,6 +21,9 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 ===========================================================================
 */
 
+#ifndef CM_POLYLIB_INCLUDED_
+#define CM_POLYLIB_INCLUDED_
+
 // this is only used for visualization tools in cm_ debug functions
 
 typedef struct
@@ -67,3 +70,6 @@ void	ChopWindingInPlace (winding_t **w, vec3_t normal, vec_t dist, vec_t epsilon
 // frees the original if clipped
 
 void pw(winding_t *w);
+
+#endif
+

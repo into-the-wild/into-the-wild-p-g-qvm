@@ -20,6 +20,10 @@ along with Tremulous; if not, write to the Free Software
 Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 ===========================================================================
 */
+
+#ifndef SURFACEFLAGS_INCLUDED_
+#define SURFACEFLAGS_INCLUDED_
+
 //
 // This file must be identical in the quake and utils directories
 
@@ -89,3 +93,6 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #define	SURF_NOALIENBUILD	0x80000  //disallow alien building
 #define	SURF_NOHUMANBUILD	0x100000 //disallow alien building
 #define	SURF_NOBUILD			0x200000 //disallow alien building
+
+#endif
+

@@ -21,6 +21,9 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 ===========================================================================
 */
 
+#ifndef G_LOCAL_INCLUDED_
+#define G_LOCAL_INCLUDED_
+
 // g_local.h -- local definitions for game module
 
 #include "../qcommon/q_shared.h"
@@ -1519,3 +1522,6 @@ qboolean  trap_GetEntityToken( char *buffer, int bufferSize );
 
 void      trap_SnapVector( float *v );
 void      trap_SendGameStat( const char *data );
+
+#endif
+

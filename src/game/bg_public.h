@@ -21,6 +21,9 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 ===========================================================================
 */
 
+#ifndef BG_PUBLIC_INCLUDED_
+#define BG_PUBLIC_INCLUDED_
+
 // bg_public.h -- definitions shared by both the server game and client game modules
 
 //tremulous balance header
@@ -1354,4 +1357,6 @@ typedef enum
 void BG_MOD_set( modExtremeType_t entry, int value );
 int  BG_MOD_get( modExtremeType_t entry);
 void BG_MOD_update( void );
+
+#endif
 
