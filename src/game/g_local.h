@@ -1474,6 +1474,8 @@ extern vmCvar_t  g_wwNoHovelBuild;
 extern vmCvar_t  g_specNoclip;
 extern vmCvar_t  g_allowDevolve;
 
+extern vmCvar_t  g_muteSpec;
+
 void      trap_Printf( const char *fmt );
 void      trap_Error( const char *fmt );
 int       trap_Milliseconds( void );

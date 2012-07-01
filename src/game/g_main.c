@@ -259,6 +259,12 @@ vmCvar_t  g_wwNoHovelBuild;
 vmCvar_t  g_specNoclip;
 vmCvar_t  g_allowDevolve;
 
+/**
+ * Indicates if all spectators are muted. A non-zero value means
+ * that all spectators should not be able to speak to the public channel.
+ */
+vmCvar_t  g_muteSpec;
+
 
 static cvarTable_t   gameCvarTable[ ] =
 {
@@ -503,6 +509,7 @@ static cvarTable_t   gameCvarTable[ ] =
   
   { &g_allowDevolve, "g_allowDevolve", "0", CVAR_ARCHIVE, 0, qtrue  },
   
+  { &g_muteSpec, "g_muteSpec", "0", CVAR_SERVERINFO, 0, qtrue }
 };
 
 static int gameCvarTableSize = sizeof( gameCvarTable ) / sizeof( gameCvarTable[ 0 ] );

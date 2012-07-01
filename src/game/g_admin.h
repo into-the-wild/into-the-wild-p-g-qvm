@@ -298,6 +298,16 @@ qboolean G_admin_bring( gentity_t *ent, int skiparg );
 qboolean G_admin_lockname( gentity_t *ent, int skiparg );
 qboolean G_admin_bubble( gentity_t *ent, int skiparg );
 
+/**
+ * Sets @ref g_muteSpec to a non-zero value.
+ */
+qboolean G_admin_muteSpec(gentity_t* ent, int skiparg);
+
+/**
+ * Sets @ref g_muteSpec to zero.
+ */
+qboolean G_admin_unmuteSpec(gentity_t* ent, int skiparg);
+
 void G_admin_print( gentity_t *ent, char *m );
 void G_admin_buffer_print( gentity_t *ent, char *m );
 void G_admin_buffer_begin( void );

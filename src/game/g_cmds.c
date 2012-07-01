@@ -1044,7 +1044,16 @@ void G_Say( gentity_t *ent, gentity_t *target, int mode, const char *chatText )
   // don't let text be too long for malicious reasons
   char        text[ MAX_SAY_TEXT ];
   char        location[ 64 ];
-
+  
+  // If `g_muteSpec` is non-zero, don't send a message from spectator
+  if (g_muteSpec.integer != 0 && mode == SAY_ALL) {
+    if (ent->client->pers.teamSelection == PTE_NONE) {
+        ADMP("Sending messages to the public chat was disabled "
+              "for spectators. Use teamchat.\n");
+        return;
+    }
+  }
+  
   // Bail if the text is blank.
   if( ! chatText[0] )
      return;

@@ -408,7 +408,15 @@ g_admin_cmd_t g_admin_cmds[ ] =
       "[^3name|slot#^7] [reason]"
     },
 
-
+    {
+        "mutespec", G_admin_muteSpec, "m",
+        "Mutes all spectators for this game.", ""
+    },
+    
+    {
+        "unmutespec", G_admin_unmuteSpec, "m",
+        "Unmutes all spectators for this game.", ""
+    }
   };
 
 static int adminNumCmds = sizeof( g_admin_cmds ) / sizeof( g_admin_cmds[ 0 ] );
@@ -7640,5 +7648,25 @@ qboolean G_admin_bubble( gentity_t *ent, int skiparg )
   }
   
   return qtrue;
+}
+
+/**
+ * Sets @ref g_muteSpec to a non-zero value.
+ */
+qboolean G_admin_muteSpec(gentity_t* ent, int skiparg) {
+    if (g_muteSpec.integer == 0) {
+        trap_Cvar_Set("g_mutespec", "1");
+    }
+    return qtrue;
+}
+
+/**
+ * Sets @ref g_muteSpec to zero.
+ */
+qboolean G_admin_unmuteSpec(gentity_t* ent, int skiparg) {
+    if (g_muteSpec.integer != 0) {
+        trap_Cvar_Set("g_mutespec", "0");
+    }
+    return qtrue;
 }
 
