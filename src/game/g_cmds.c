@@ -2513,6 +2513,11 @@ void Cmd_CallTeamVote_f( gentity_t *ent )
   }
    else if( !Q_stricmp( arg1, "poll" ) )
    {
+	 if(!arg2[0]) {
+		 trap_SendServerCommand( ent-g_entities, "print \"poll: nothing to vote about\n\"" );
+		 return;
+	 }
+
      IsPoll=qtrue;
      Com_sprintf( level.teamVoteString[ cs_offset ], sizeof( level.teamVoteString[ cs_offset ] ), nullstring );
      Com_sprintf( level.teamVoteDisplayString[ cs_offset ],
