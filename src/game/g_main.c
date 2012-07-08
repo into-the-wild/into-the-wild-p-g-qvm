@@ -962,10 +962,19 @@ static void G_ClearVotes( void )
 {
   level.voteTime = 0;
   trap_SetConfigstring( CS_VOTE_TIME, "" );
+  //fix as by https://bugzilla.icculus.org/show_bug.cgi?id=3964
+  trap_SetConfigstring( CS_VOTE_STRING, "" );
+
   level.teamVoteTime[ 0 ] = 0;
   trap_SetConfigstring( CS_TEAMVOTE_TIME, "" );
+  //fix as by https://bugzilla.icculus.org/show_bug.cgi?id=3964
+  trap_SetConfigstring( CS_TEAMVOTE_STRING, "" );
+
   level.teamVoteTime[ 1 ] = 0;
   trap_SetConfigstring( CS_TEAMVOTE_TIME + 1, "" );
+  //fix as by https://bugzilla.icculus.org/show_bug.cgi?id=3964
+  trap_SetConfigstring( CS_TEAMVOTE_STRING + 1, "" );
+
 }
 
 /*
@@ -2582,6 +2591,8 @@ void CheckVote( void )
 
   level.voteTime = 0;
   trap_SetConfigstring( CS_VOTE_TIME, "" );
+  //fix as by https://bugzilla.icculus.org/show_bug.cgi?id=3964
+  trap_SetConfigstring( CS_VOTE_STRING, "" );
 }
 
 
@@ -2658,6 +2669,9 @@ void CheckTeamVote( int team )
 
   level.teamVoteTime[ cs_offset ] = 0;
   trap_SetConfigstring( CS_TEAMVOTE_TIME + cs_offset, "" );
+  //fix as by https://bugzilla.icculus.org/show_bug.cgi?id=3964
+  trap_SetConfigstring( CS_TEAMVOTE_STRING + cs_offset, "" );
+
 }
 
 /*
