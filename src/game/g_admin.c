@@ -1580,6 +1580,33 @@ qboolean G_admin_cmd_check( gentity_t *ent, qboolean say )
 
     if( admin_command_permission( ent, cmd ) )
     {
+    	/*
+    	 * allows arguments to be passed to custom admin commands by setting some cvars
+    	 * e.g. !cmd argument1 argument2...
+    	 *
+    	 * arg_all: all arguments as a whole, appended after the cmd
+    	 * arg_n: the arguments at position n
+    	 * arg_count: number of arguments
+    	 * arg_client: the name of the client executing the command
+    	 *
+    	 * @author amanieu
+    	 * @see https://bugzilla.icculus.org/show_bug.cgi?id=3387
+    	 */
+		int j;
+		trap_Cvar_Register( NULL, "arg_all", "", CVAR_TEMP | CVAR_ROM | CVAR_USER_CREATED );
+		trap_Cvar_Set( "arg_all", G_SayConcatArgs( skip + 1 ) );
+		trap_Cvar_Register( NULL, "arg_count", "", CVAR_TEMP | CVAR_ROM | CVAR_USER_CREATED );
+		trap_Cvar_Set( "arg_count", va( "%i", G_SayArgc() - ( skip + 1 ) ) );
+		trap_Cvar_Register( NULL, "arg_client", "", CVAR_TEMP | CVAR_ROM | CVAR_USER_CREATED );
+		trap_Cvar_Set( "arg_client", ent->client->pers.netname );
+		for (j = G_SayArgc() - ( skip + 1 ); j; j--) {
+			char this_arg[ MAX_CVAR_VALUE_STRING ];
+			trap_Cvar_Register( NULL, va( "arg_%i", j ), "", CVAR_TEMP | CVAR_ROM | CVAR_USER_CREATED );
+			G_SayArgv( j + skip, this_arg, sizeof( this_arg ) );
+			trap_Cvar_Set( va( "arg_%i", j ), this_arg );
+		}
+		// end feature icculus-3387
+
       trap_SendConsoleCommand( EXEC_APPEND, g_admin_commands[ i ]->exec );
       admin_log( ent, cmd, skip );
       G_admin_adminlog_log( ent, cmd, NULL, skip, qtrue );
