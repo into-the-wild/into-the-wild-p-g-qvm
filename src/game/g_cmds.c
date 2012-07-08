@@ -2514,7 +2514,7 @@ void Cmd_CallTeamVote_f( gentity_t *ent )
    else if( !Q_stricmp( arg1, "poll" ) )
    {
 	 if(!arg2[0]) {
-		 trap_SendServerCommand( ent-g_entities, "print \"poll: nothing to vote about\n\"" );
+		 trap_SendServerCommand( ent-g_entities, "print \"poll: that is nothing to vote about\n\"" );
 		 return;
 	 }
 
