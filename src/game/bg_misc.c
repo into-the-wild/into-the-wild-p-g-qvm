@@ -5528,7 +5528,8 @@ void BG_ParseCSVBuildableList( const char *string, buildable_t *buildables, int 
     while( *q == ' ' )
       q++;
 
-    buildables[ i ] = BG_FindClassNumForName( q );
+    //backport of icculus-3742 https://bugzilla.icculus.org/show_bug.cgi?id=3742
+    buildables[ i ] = BG_FindBuildNumForName( q );
 
     if( buildables[ i ] == BA_NONE )
       Com_Printf( S_COLOR_YELLOW "WARNING: unknown buildable %s\n", q );
