@@ -5224,13 +5224,15 @@ static void Cmd_Ignore_f( gentity_t *ent )
  
    trap_Argv( 1, s, sizeof( s ) );
    value = atoi(s);
+   
+   if( value > ent->client->ps.persistant[ PERS_CREDIT ] )
+     value = ent->client->ps.persistant[ PERS_CREDIT ];
+ 
    if( value <= 0 ) {
      trap_SendServerCommand( ent-g_entities,
        "print \"donate: very funny\n\"" );
      return;
    }
-   if( value > ent->client->ps.persistant[ PERS_CREDIT ] )
-     value = ent->client->ps.persistant[ PERS_CREDIT ];
  
    // allocate memory for distribution amounts
    amounts = G_Alloc( level.maxclients * sizeof( int ) );
