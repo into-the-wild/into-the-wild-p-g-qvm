@@ -65,8 +65,17 @@ void G_SanitiseName( char *in, char *out )
       in++;
       continue;
     }
-
-    *out++ = tolower( *in++ );
+    
+    if (*in == 'I') {
+        *out++ = 'l';
+    } else if (*in == '0') {
+        *out++ = 'O';
+    } else if (*in == '.') {
+        *out++ = ',';
+    } else {
+        *out++ = tolower( *in );
+    }
+    ++in;
     out_len++;
   }
   out -= spaces; 
