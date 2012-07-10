@@ -2010,6 +2010,10 @@ void Cmd_CallVote_f( gentity_t *ent )
        trap_SendServerCommand( ent-g_entities, "print \"Poll votes have been disabled\n\"" );
        return;
      }
+	if(!arg2[0]) {
+		 trap_SendServerCommand( ent-g_entities, "print \"poll: that is nothing to vote about\n\"" );
+		 return;
+	}
     Com_sprintf( level.voteString, sizeof( level.voteString ), nullstring);
     Com_sprintf( level.voteDisplayString,
         sizeof( level.voteDisplayString ), "[Poll] \'%s^g\'", arg2plus );
