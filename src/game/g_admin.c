@@ -3546,7 +3546,7 @@ qboolean G_admin_listplayers( gentity_t *ent, int skiparg )
                t,
                l,
                ( *lname ) ? lname2 : "", 
-               guid_stub,
+               (guid_stub[0] != 'X')? guid_stub : "^dXXXXXXXX^g",
 	       immune,
                muted,
 	       dbuilder,
