@@ -4466,10 +4466,12 @@ qboolean G_admin_namelog( gentity_t *ent, int skiparg )
     guid_stub[ j ] = '\0';
     if( g_admin_namelog[ i ]->slot > -1 )
        ADMBP( "^3" );
-    ADMBP( va( "%-2s (*%s) %15s^7", 
+    ADMBP( va( "%-2s (*%s^%s) %15s^7", 
       (g_admin_namelog[ i ]->slot > -1 ) ?
         va( "%d", g_admin_namelog[ i ]->slot ) : "-",
-      (guid_stub[0] != 'X')? guid_stub : "^dXXXXXXXX^g", g_admin_namelog[ i ]->ip ) );
+      (guid_stub[0] != 'X')? guid_stub : "^dXXXXXXXX",
+      (g_admin_namelog[ i ]->slot > -1)? "c" : "g",
+      g_admin_namelog[ i ]->ip ) );
     for( j = 0; j < MAX_ADMIN_NAMELOG_NAMES && 
       g_admin_namelog[ i ]->name[ j ][ 0 ]; j++ )
     {
