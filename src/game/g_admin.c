@@ -32,6 +32,13 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 #include "g_local.h"
 
+/**
+ * Format for line format for @ref printNamelog.
+ */
+#define PRINTNAMELOG_LINEFMT_ \
+  " ^%%c%%%ds %%%ds^%%c %%-%ds ^a%%-%ds^g %%s\n"
+
+
 void NoThink(gentity_t *ent);
 // big ugly global buffer for use with buffered printing of long outputs
 static char g_bfb[ 32000 ];
@@ -4426,64 +4433,6 @@ qboolean G_admin_nextmap( gentity_t *ent, int skiparg )
   return qtrue;
 }
 
-qboolean G_admin_namelog( gentity_t *ent, int skiparg )
-{
-  int i, j;
-  char search[ MAX_NAME_LENGTH ] = {""};
-  char s2[ MAX_NAME_LENGTH ] = {""};
-  char n2[ MAX_NAME_LENGTH ] = {""};
-  char guid_stub[ 9 ];
-  qboolean found = qfalse;
-  int printed = 0;
-
-  if( G_SayArgc() > 1 + skiparg )
-  {
-    G_SayArgv( 1 + skiparg, search, sizeof( search ) );
-    G_SanitiseName( search, s2 );
-  }
-  ADMBP_begin();
-  for( i = 0; i < MAX_ADMIN_NAMELOGS && g_admin_namelog[ i ]; i++ )
-  {
-    if( search[0] )
-    {
-      found = qfalse;
-      for( j = 0; j < MAX_ADMIN_NAMELOG_NAMES && 
-        g_admin_namelog[ i ]->name[ j ][ 0 ]; j++ )
-      {
-        G_SanitiseName( g_admin_namelog[ i ]->name[ j ], n2 );
-        if( strstr( n2, s2 ) )
-        {
-          found = qtrue;
-          break;
-        }
-      }
-      if( !found )
-        continue;
-    }
-    printed++;
-    for( j = 0; j < 8; j++ )
-      guid_stub[ j ] = g_admin_namelog[ i ]->guid[ j + 24 ];
-    guid_stub[ j ] = '\0';
-    if( g_admin_namelog[ i ]->slot > -1 )
-       ADMBP( "^3" );
-    ADMBP( va( "%-2s (*%s^%s) %15s^7", 
-      (g_admin_namelog[ i ]->slot > -1 ) ?
-        va( "%d", g_admin_namelog[ i ]->slot ) : "-",
-      (guid_stub[0] != 'X')? guid_stub : "^dXXXXXXXX",
-      (g_admin_namelog[ i ]->slot > -1)? "c" : "g",
-      g_admin_namelog[ i ]->ip ) );
-    for( j = 0; j < MAX_ADMIN_NAMELOG_NAMES && 
-      g_admin_namelog[ i ]->name[ j ][ 0 ]; j++ )
-    {
-      ADMBP( va( " '%s^7'", g_admin_namelog[ i ]->name[ j ] ) );
-    }
-    ADMBP( "\n" ); 
-  } 
-  ADMBP( va( "^3!namelog:^7 %d recent clients found\n", printed ) );
-  ADMBP_end();
-  return qtrue;
-}
-
 qboolean G_admin_lock( gentity_t *ent, int skiparg )
 {
   char teamName[2] = {""};
@@ -7696,6 +7645,173 @@ qboolean G_admin_unmuteSpec(gentity_t* ent, int skiparg) {
     if (g_muteSpec.integer != 0) {
         trap_Cvar_Set("g_mutespec", "0");
     }
+    return qtrue;
+}
+
+/**
+ * Prints namelog to @p dst. Optionally prints only entries of players whose
+ * names match @p searchedName. The namelog is printed in chronologic order.
+ * 
+ * @param dst
+ *      A player entity to which output should go.
+ * @param [in] searchedName
+ *      A pointer to a c-string that holds value used to filter namelog
+ *      entries. Only entries that contain @p searchedName will be printed.
+ *      If @p searchedName is @c NULL, all entries are printed.
+ * 
+ * @return
+ *      A non-negative integer indicating total number of entries printed.
+ */
+static int printNamelog(gentity_t* dst, char const* searchedName) {
+    g_admin_namelog_t* matches[MAX_ADMIN_NAMELOGS];
+    int freeEntryIdx = 0;
+    struct {
+        int id;
+        int guid;
+        int ip4addr;
+        int flags;
+    } maxWidth = {-1, -1, -1, -1};
+    char slotIds[MAX_ADMIN_NAMELOGS][3] = {0};
+    char slotFlags[MAX_ADMIN_NAMELOGS][5] = {0};
+    int i;
+    int j;
+    char fmt[sizeof(PRINTNAMELOG_LINEFMT_)] = "";
+    
+    // Find matches
+    for (i = 0; i < MAX_ADMIN_NAMELOGS && g_admin_namelog[i] != NULL; ++i) {
+        qboolean matching = qfalse;
+        if (searchedName != NULL) {
+            char sanitizedName[MAX_NAME_LENGTH] = "";
+            for (j = 0; j < MAX_ADMIN_NAMELOG_NAMES
+                  && g_admin_namelog[i]->name[j][0]; ++j) {
+                G_SanitiseName(g_admin_namelog[i]->name[j], sanitizedName);
+                if (strstr(sanitizedName, searchedName) != NULL) {
+                    matching = qtrue;
+                }
+            }
+        } else {
+            matching = qtrue;
+        }
+        
+        if (matching) {
+            matches[freeEntryIdx++] = g_admin_namelog[i];
+        }
+    }
+    
+    // Find columns widths
+    for (i = 0; i < freeEntryIdx; ++i) {
+        int fieldLen;
+        int flagsOffset = 0;
+        
+        // Slot field with
+        if (matches[i]->slot > -1) {
+            Q_strncpyz(slotIds[i], va("%d", matches[i]->slot),
+                  sizeof(slotIds[i]));
+        } else {
+            Q_strncpyz(slotIds[i], "-", sizeof(slotIds[i]));
+        }
+        
+        fieldLen = strlen(slotIds[i]);
+        if (fieldLen > maxWidth.id) {
+            maxWidth.id = fieldLen;
+        }
+        
+        // IPv4 address field width
+        fieldLen = strlen(matches[i]->ip);
+        if (fieldLen > maxWidth.ip4addr) {
+            maxWidth.ip4addr = fieldLen;
+        }
+        
+        // GUID tail field width
+        if (matches[i]->guid[0] != 'X') {
+            fieldLen = 8;
+        } else {
+            fieldLen = sizeof("no guid");
+        }
+        if (fieldLen > maxWidth.guid) {
+            maxWidth.guid = fieldLen;
+        }
+        
+        // Sticky flags field width
+        if (matches[i]->banned) {
+            slotFlags[i][flagsOffset++] = 'X';
+        }
+        if (matches[i]->denyBuild) {
+            slotFlags[i][flagsOffset++] = 'B';
+        }
+        if (matches[i]->muted) {
+            slotFlags[i][flagsOffset++] = 'M';
+        }
+        if (matches[i]->boundToSpec) {
+            slotFlags[i][flagsOffset++] = 'S';
+        }
+        
+        if (flagsOffset > maxWidth.flags) {
+            maxWidth.flags = flagsOffset;
+        }
+    }
+    // WARNING: none of max.* values should exceed 99 after this point!
+    
+    // Prepare line format
+    Q_strncpyz(fmt, va(PRINTNAMELOG_LINEFMT_,
+          maxWidth.id, maxWidth.guid, maxWidth.ip4addr, maxWidth.flags),
+          sizeof(fmt));
+    
+    // Print data
+    for (i = 0; i < freeEntryIdx; ++i) {
+        char const color = (matches[i]->slot > -1)? 'g' : 'c';
+        char guidTail[10];
+        
+        if (matches[i]->guid[0] != 'X') {
+            Q_strncpyz(guidTail, matches[i]->guid + 24, sizeof(guidTail));
+        } else {
+            Q_strncpyz(guidTail, "^eno guid", sizeof(guidTail));
+        }
+        
+        G_admin_buffer_print(dst,
+              va(fmt,
+              color,
+              slotIds[i],
+              guidTail,
+              color,
+              matches[i]->ip,
+              slotFlags[i],
+              matches[i]->name[0]
+              ));
+        for (j = 1; j < MAX_ADMIN_NAMELOG_NAMES && matches[i]->name[j][0];
+              ++j) {
+            char const bar = (j < MAX_ADMIN_NAMELOG_NAMES - 1
+                  && matches[i]->name[j+1][0])? '|' : '\\';
+            G_admin_buffer_print(dst, va("   ^%c%c^g %s\n", color, bar,
+                  matches[i]->name[j]));
+        }
+    }
+    
+    return freeEntryIdx;
+}
+
+qboolean G_admin_namelog(gentity_t* caller, int skiparg) {
+    char searchedName[MAX_NAME_LENGTH] = "";
+    int entriesFound;
+    
+    if (G_SayArgc() > 1 + skiparg) {
+        char searchArg[MAX_NAME_LENGTH] = "";
+        if (!G_SayArgv(1 + skiparg, searchArg, sizeof(searchArg))) {
+            G_admin_print(caller,
+                  va("^c!namelog:^a internal error (%s:%d).\n",
+                  __FILE__, __LINE__));
+            return qfalse;
+        }
+        G_SanitiseName(searchArg, searchedName);
+    }
+    
+    G_admin_buffer_begin();
+    entriesFound = printNamelog(caller, searchedName[0]? searchedName : NULL);
+    G_admin_print(caller, va("^c!namelog: %d %s found\n",
+          entriesFound,
+          (entriesFound != 1)? "entries" : "entry"));
+    G_admin_buffer_end(caller);
+    
     return qtrue;
 }
 
