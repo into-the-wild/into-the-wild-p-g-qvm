@@ -36,7 +36,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
  * Format for line format for @ref printNamelog.
  */
 #define PRINTNAMELOG_LINEFMT_ \
-  " ^%%c%%%ds %%%ds^%%c %%-%ds ^a%%-%ds^g %%s\n"
+  " ^%%c%%%ds ^%%c%%%ds^%%c %%-%ds ^a%%-%ds^g %%s\n"
 
 
 void NoThink(gentity_t *ent);
@@ -7760,18 +7760,22 @@ static int printNamelog(gentity_t* dst, char const* searchedName) {
     // Print data
     for (i = 0; i < freeEntryIdx; ++i) {
         char const color = (matches[i]->slot > -1)? 'g' : 'c';
-        char guidTail[10];
+        char guidTail[9];
+        char guidColor;
         
         if (matches[i]->guid[0] != 'X') {
             Q_strncpyz(guidTail, matches[i]->guid + 24, sizeof(guidTail));
+            guidColor = color;
         } else {
-            Q_strncpyz(guidTail, "^eno guid", sizeof(guidTail));
+            Q_strncpyz(guidTail, "no guid", sizeof(guidTail));
+            guidColor = 'd';
         }
         
         G_admin_buffer_print(dst,
               va(fmt,
               color,
               slotIds[i],
+              guidColor,
               guidTail,
               color,
               matches[i]->ip,
