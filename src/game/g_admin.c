@@ -5743,6 +5743,7 @@ qboolean G_admin_cp( gentity_t *ent, int skiparg )
   return qtrue;
 }
 
+
 qboolean G_admin_L0(gentity_t *ent, int skiparg ){
   int pids[ MAX_CLIENTS ];
   char name[ MAX_NAME_LENGTH ] = {""};

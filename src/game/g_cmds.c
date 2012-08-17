@@ -1721,6 +1721,14 @@ void Cmd_CallVote_f( gentity_t *ent )
       g_voteLimit.integer ) );
     return;
   }
+
+  // Flood limit.  If they're voting too fast, determine that and return.
+  if( g_floodMinTime.integer )
+    if ( G_Flood_Limited( ent ) )
+    {
+      trap_SendServerCommand( ent-g_entities, "print \"Your vote-calling is flood-limited; wait before calling a vote again\n\"" );
+      return;
+    }
   
   if( ent->client->pers.muted )
   {
@@ -2289,6 +2297,14 @@ void Cmd_CallTeamVote_f( gentity_t *ent )
       g_voteLimit.integer ) );
     return;
   }
+
+  // Flood limit.  If they're voting too fast, determine that and return.
+  if( g_floodMinTime.integer )
+    if ( G_Flood_Limited( ent ) )
+    {
+      trap_SendServerCommand( ent-g_entities, "print \"Your vote-calling is flood-limited; wait before calling a vote again\n\"" );
+      return;
+    }
   
   if( ent->client->pers.muted )
   {
