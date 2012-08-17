@@ -2298,7 +2298,7 @@ void Cmd_CallTeamVote_f( gentity_t *ent )
     return;
   }
 
-  // Flood limit.  If they're voting too fast, determine that and return.
+  // Flood limit.  If they're voting too fast, determine that and return..
   if( g_floodMinTime.integer )
     if ( G_Flood_Limited( ent ) )
     {
