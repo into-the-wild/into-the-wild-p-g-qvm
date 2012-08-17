@@ -7760,7 +7760,7 @@ static int printNamelog(gentity_t* dst, char const* searchedName) {
     
     // Print data
     for (i = 0; i < freeEntryIdx; ++i) {
-        char const color = (matches[i]->slot > -1)? 'g' : 'c';
+        char const color = (matches[i]->slot > -1)? 'c' : 'g';
         char guidTail[9];
         char guidColor;
         
