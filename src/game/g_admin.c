@@ -7811,10 +7811,10 @@ qboolean G_admin_namelog(gentity_t* caller, int skiparg) {
     
     G_admin_buffer_begin();
     entriesFound = printNamelog(caller, searchedName[0]? searchedName : NULL);
+    G_admin_buffer_end(caller);
     G_admin_print(caller, va("^c!namelog: %d %s found\n",
           entriesFound,
           (entriesFound != 1)? "entries" : "entry"));
-    G_admin_buffer_end(caller);
     
     return qtrue;
 }
