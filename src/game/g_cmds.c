@@ -1144,9 +1144,9 @@ void G_Say( gentity_t *ent, gentity_t *target, int mode, const char *chatText )
         if( G_admin_permission( ent, ADMF_ADMINCHAT ) ) //Differentiate between inter-admin chatter and user-admin alerts
         {
          G_LogPrintf( "say_admins: [ADMIN]%s: %s\n", ( ent ) ? ent->client->pers.netname : "console", chatText );
-         Com_sprintf( name, sizeof( name ), "%c%c=%c%cADMIN%c%c= %s%c%c"EC": ",
+         Com_sprintf( name, sizeof( name ), "%c%c=%c%cADMIN%c%c= %c%c%s%c%c"EC": ",
         		Q_COLOR_ESCAPE, COLOR_RED, Q_COLOR_ESCAPE, COLOR_GREEN, Q_COLOR_ESCAPE, COLOR_RED,
-        		 ( ent ) ? ent->client->pers.netname : "console", Q_COLOR_ESCAPE, COLOR_WHITE );
+        		Q_COLOR_ESCAPE, COLOR_WHITE, ( ent ) ? ent->client->pers.netname : "console", Q_COLOR_ESCAPE, COLOR_WHITE );
 	color = COLOR_MAGENTA;
 	}
 	else
